@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.vomiter.survivorsabilities.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "nourishment.TFCFoodData_Mixin",
+    "workhorse.ForgeEvent_Mixin",
+    "workhorse.TFCChestedHorse_Mixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "survivorsabilities.mixins.refmap.json"
+}
