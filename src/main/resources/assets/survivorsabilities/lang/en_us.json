@@ -1,4 +1,6 @@
 {
   "attribute.name.survivorsabilities.hunger_tolerance": "Hunger Tolerance",
-  "attribute.name.survivorsabilities.max_load": "Maximum Weight Capacity"
+  "attribute.name.survivorsabilities.max_load": "Maximum Weight Capacity",
+
+  "effect.survivorsabilities.workhorse": "Workhorse"
 }

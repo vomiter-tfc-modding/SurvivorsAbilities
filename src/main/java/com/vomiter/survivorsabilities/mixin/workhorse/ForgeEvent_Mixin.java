@@ -24,7 +24,7 @@ public class ForgeEvent_Mixin {
         if(max_load == 1) return original;
         if(hugeCount != 2) return original;
         if(SAHelper.countHeavy(player) <= max_load){
-            Helpers.getExhausted(false);
+            return Helpers.getExhausted(false);
         }
         return original;
     }

@@ -2,6 +2,7 @@ package com.vomiter.survivorsabilities;
 
 import com.mojang.logging.LogUtils;
 import com.vomiter.survivorsabilities.core.SAAttributes;
+import com.vomiter.survivorsabilities.core.SAEffects;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -33,6 +34,7 @@ public class SurvivorsAbilities
 
     private void common(){
         SAAttributes.ATTRIBUTES.register(modBus);
+        SAEffects.EFFECTS.register(modBus);
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
