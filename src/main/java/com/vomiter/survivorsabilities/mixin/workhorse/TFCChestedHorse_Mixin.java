@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(value = TFCChestedHorse.class, remap = false)
 public class TFCChestedHorse_Mixin {
-    @ModifyConstant(method = "containerChanged", constant = @Constant(intValue = 0), remap = true)
+    @ModifyConstant(method = "containerChanged(Lnet/minecraft/world/Container;)V", constant = @Constant(intValue = 0), remap = true)
     private int antiOverburnden(int constant) {
         var self = (TFCChestedHorse)(Object) this;
         return (int) (self.getAttribute(SAAttributes.MAX_LOAD.get()).getValue() - 1);
