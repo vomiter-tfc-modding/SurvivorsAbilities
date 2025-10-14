@@ -5,7 +5,10 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "appetite.Item_AlwaysEdible",
+    "appetite.NutritionDataAccessor",
+    "appetite.TFCFoodData_EatMixin",
     "nourishment.TFCFoodData_Mixin",
+    "workhorse.AbstractHorseAccessor",
     "workhorse.ForgeEvent_Mixin",
     "workhorse.TFCChestedHorse_Mixin"
   ],
