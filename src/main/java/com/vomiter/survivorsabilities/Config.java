@@ -1,8 +1,8 @@
 package com.vomiter.survivorsabilities;
 
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = SurvivorsAbilities.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = SurvivorsAbilities.MODID)
 public class Config
 {
 }

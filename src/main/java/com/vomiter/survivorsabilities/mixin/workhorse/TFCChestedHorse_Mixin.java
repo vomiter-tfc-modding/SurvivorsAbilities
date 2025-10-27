@@ -17,7 +17,7 @@ public class TFCChestedHorse_Mixin {
     private void antiOverburden(CallbackInfo ci) {
         var self = (TFCChestedHorse)(Object) this;
         if(overburdened){
-            double max_load = self.getAttribute(SAAttributes.MAX_LOAD.get()).getValue();
+            double max_load = self.getAttribute(SAAttributes.MAX_LOAD).getValue();
             overburdened = (SAHelper.countHeavy(((AbstractHorseAccessor)self).getInv(), max_load) > max_load);
         }
     }

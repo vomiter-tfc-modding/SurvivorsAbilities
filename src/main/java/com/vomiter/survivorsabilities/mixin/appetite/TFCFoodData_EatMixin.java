@@ -1,9 +1,9 @@
 package com.vomiter.survivorsabilities.mixin.appetite;
 
-import net.dries007.tfc.common.capabilities.food.TFCFoodData;
+import net.dries007.tfc.common.player.PlayerInfo;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(TFCFoodData.class)
+@Mixin(PlayerInfo.class)
 public class TFCFoodData_EatMixin {
 
 }

@@ -1,6 +1,7 @@
 package com.vomiter.survivorsabilities.core.effect;
 
 import com.vomiter.survivorsabilities.core.SAAttributes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -8,11 +9,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 public class OvereatenEffect extends MobEffect {
     public OvereatenEffect() {
         super(MobEffectCategory.NEUTRAL, 0);
-        this.addAttributeModifier(SAAttributes.APPETITE.get(), "b20b104c-4029-4ace-8db5-3971dd51caf0", 0, AttributeModifier.Operation.ADDITION);
-    }
-
-    @Override
-    public double getAttributeModifierValue(int amp, AttributeModifier p_19458_) {
-        return 5 * (amp + 1) * -1;
+        this.addAttributeModifier(
+                SAAttributes.APPETITE,
+                ResourceLocation.fromNamespaceAndPath("survivorsabilities", "overeaten"),
+                -5,
+                AttributeModifier.Operation.ADD_VALUE);
     }
 }

@@ -1,19 +1,18 @@
 package com.vomiter.survivorsabilities.core;
 
 import com.vomiter.survivorsabilities.SurvivorsAbilities;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public final class SAAttributes {
-    private SAAttributes() {}
 
     public static final DeferredRegister<Attribute> ATTRIBUTES =
-            DeferredRegister.create(ForgeRegistries.ATTRIBUTES, SurvivorsAbilities.MODID);
+            DeferredRegister.create(Registries.ATTRIBUTE, SurvivorsAbilities.MODID);
 
-    public static final RegistryObject<Attribute> MAX_LOAD = ATTRIBUTES.register(
+    public static final DeferredHolder<Attribute, Attribute> MAX_LOAD = ATTRIBUTES.register(
             "max_load",
             () -> new RangedAttribute(
                     "attribute.name." + SurvivorsAbilities.MODID + ".max_load",
@@ -21,7 +20,7 @@ public final class SAAttributes {
             ).setSyncable(true)
     );
 
-    public static final RegistryObject<Attribute> HUNGER_TOLERANCE = ATTRIBUTES.register(
+    public static final DeferredHolder<Attribute, Attribute> HUNGER_TOLERANCE = ATTRIBUTES.register(
             "hunger_tolerance",
             () -> new RangedAttribute(
                     "attribute.name." + SurvivorsAbilities.MODID + ".hunger_tolerance",
@@ -29,7 +28,7 @@ public final class SAAttributes {
             ).setSyncable(true)
     );
 
-    public static final RegistryObject<Attribute> APPETITE = ATTRIBUTES.register(
+    public static final DeferredHolder<Attribute, Attribute> APPETITE = ATTRIBUTES.register(
             "appetite",
             () -> new RangedAttribute(
                     "attribute.name." + SurvivorsAbilities.MODID + ".appetite",

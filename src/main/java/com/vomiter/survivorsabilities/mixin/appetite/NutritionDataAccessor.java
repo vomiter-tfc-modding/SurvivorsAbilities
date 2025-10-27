@@ -1,7 +1,7 @@
 package com.vomiter.survivorsabilities.mixin.appetite;
 
-import net.dries007.tfc.common.capabilities.food.FoodData;
-import net.dries007.tfc.common.capabilities.food.NutritionData;
+import net.dries007.tfc.common.component.food.FoodData;
+import net.dries007.tfc.common.component.food.NutritionData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
