@@ -1,30 +1,67 @@
 package com.vomiter.survivorsabilities.mixin.nourishment;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.vomiter.survivorsabilities.core.SAAttributes;
 import net.dries007.tfc.common.capabilities.food.TFCFoodData;
+import net.dries007.tfc.config.TFCConfig;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Objects;
 
 @Mixin(TFCFoodData.class)
-public class TFCFoodData_Mixin {
+public abstract class TFCFoodData_Mixin {
 
     @Shadow @Final private Player sourcePlayer;
 
     @Shadow @Final private FoodData delegate;
 
+    @Shadow public abstract int getFoodLevel();
+
+    @Shadow public abstract float getThirst();
+
+    @Shadow @Final public static float PASSIVE_HEALING_PER_TEN_TICKS;
+
     @ModifyConstant(method = "addExhaustion", constant = @Constant(floatValue = 0.4f))
     private float tolerateExhaustion(float value, @Local(argsOnly = true) float toAdd){
         if(toAdd > 0){
-            float toleranceLvl = (float) sourcePlayer.getAttribute(SAAttributes.HUNGER_TOLERANCE.get()).getValue();
-            return Math.max(value * (1 - toleranceLvl/10), 0);
+            if(getFoodLevel() >= 4 && getThirst() > 20 && sourcePlayer.isHurt()){
+                float toleranceLvl = (float) Objects.requireNonNull(sourcePlayer.getAttribute(SAAttributes.HUNGER_TOLERANCE.get())).getValue();
+                return Math.max(value * (1 - toleranceLvl/10), 0);
+            }
         }
         return value;
     }
 
+    @Inject(method = "tick", at = @At(value = "TAIL"))
+    private void healForExtreme(Player player, CallbackInfo ci){
+        if(getFoodLevel() < 4 || getThirst() <= 20){
+            if(player.tickCount % 10 == 0 && player.isHurt()) player.heal(
+                    (float) (player.getAttribute(SAAttributes.RESILIENCE.get()).getValue()
+                            * PASSIVE_HEALING_PER_TEN_TICKS
+                            * TFCConfig.SERVER.naturalRegenerationModifier.get().floatValue())
+            );
+        }
+    }
+
+
+    @ModifyArg(
+                method = "tick",
+                at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;heal(F)V"),
+                index = 0,
+                slice = @Slice(
+                        from = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;isHurt()Z")
+                )
+        )
+    private float buffNaturalHeal(float original) {
+        float resilienceHeal = (float) (Objects.requireNonNull(sourcePlayer.getAttribute(SAAttributes.RESILIENCE.get())).getValue() * 0.0039999997F * TFCConfig.SERVER.naturalRegenerationModifier.get().floatValue());
+        return Math.max(resilienceHeal, original);
+    }
 }

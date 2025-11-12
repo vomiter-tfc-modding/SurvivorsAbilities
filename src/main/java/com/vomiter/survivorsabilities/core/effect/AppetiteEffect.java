@@ -6,7 +6,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
 public class AppetiteEffect extends MobEffect {
-    protected AppetiteEffect() {
+    public AppetiteEffect() {
         super(MobEffectCategory.NEUTRAL, 0);
         this.addAttributeModifier(SAAttributes.APPETITE.get(), "b20b104c-4029-4ace-8db5-3971dd51caf0", 0, AttributeModifier.Operation.ADDITION);
     }

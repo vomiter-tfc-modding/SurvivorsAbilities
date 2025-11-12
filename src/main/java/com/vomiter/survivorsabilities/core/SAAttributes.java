@@ -29,6 +29,14 @@ public final class SAAttributes {
             ).setSyncable(true)
     );
 
+    public static final RegistryObject<Attribute> RESILIENCE = ATTRIBUTES.register(
+            "resilience",
+            () -> new RangedAttribute(
+                    "attribute.name." + SurvivorsAbilities.MODID + ".resilience",
+                    0D, 0D, 3D
+            ).setSyncable(true)
+    );
+
     public static final RegistryObject<Attribute> APPETITE = ATTRIBUTES.register(
             "appetite",
             () -> new RangedAttribute(

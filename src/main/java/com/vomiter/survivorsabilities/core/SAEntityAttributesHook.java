@@ -19,6 +19,7 @@ public final class SAEntityAttributesHook {
         event.add(TFCEntities.MULE.get(), SAAttributes.MAX_LOAD.get());
 
         event.add(EntityType.PLAYER, SAAttributes.HUNGER_TOLERANCE.get());
+        event.add(EntityType.PLAYER, SAAttributes.RESILIENCE.get());
         event.add(EntityType.PLAYER, SAAttributes.APPETITE.get());
     }
 }

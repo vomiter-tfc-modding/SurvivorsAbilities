@@ -1,6 +1,6 @@
 {
   "attribute.name.survivorsabilities.hunger_tolerance": "飢餓耐受",
   "attribute.name.survivorsabilities.max_load": "最大負重",
-
+  "attribute.name.survivorsabilities.resilience": "自我復原",
   "effect.survivorsabilities.workhorse": "載重"
 }
