@@ -36,5 +36,14 @@ public final class SAAttributes {
             ).setSyncable(true)
     );
 
+    public static final DeferredHolder<Attribute, Attribute> RESILIENCE = ATTRIBUTES.register(
+            "resilience",
+            () -> new RangedAttribute(
+                    "attribute.name." + SurvivorsAbilities.MODID + ".resilience",
+                    0D, 0D, 3D
+            ).setSyncable(true)
+    );
+
+
 
 }

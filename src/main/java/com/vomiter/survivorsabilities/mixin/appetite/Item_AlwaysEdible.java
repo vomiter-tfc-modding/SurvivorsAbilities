@@ -25,8 +25,8 @@ public class Item_AlwaysEdible {
         float appetite = (float) Objects.requireNonNull(player.getAttribute(SAAttributes.APPETITE)).getValue();
         boolean canEat = food.getData().hunger() <= appetite;
         int overeaten_lvl = (int) Math.ceil(((float)food.getData().hunger()/4f));
-        int basic_overeaten_lvl = player.hasEffect(SAEffects.Overeaten) ? Objects.requireNonNull(player.getEffect(SAEffects.Overeaten)).getAmplifier() : 0;
-        if(canEat && !player.isCreative()) player.addEffect(new MobEffectInstance(SAEffects.Overeaten, 20 * 60 * 10, overeaten_lvl + basic_overeaten_lvl, true, false, false));
+        int basic_overeaten_lvl = player.hasEffect(SAEffects.OVEREATEN) ? Objects.requireNonNull(player.getEffect(SAEffects.OVEREATEN)).getAmplifier() : 0;
+        if(canEat && !player.isCreative()) player.addEffect(new MobEffectInstance(SAEffects.OVEREATEN, 20 * 60 * 10, overeaten_lvl + basic_overeaten_lvl, true, false, false));
         return canEat;
     }
 }

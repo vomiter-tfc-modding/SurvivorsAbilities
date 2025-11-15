@@ -20,5 +20,8 @@ public final class SAEntityAttributesHook {
 
         event.add(EntityType.PLAYER, SAAttributes.HUNGER_TOLERANCE);
         event.add(EntityType.PLAYER, SAAttributes.APPETITE);
+        event.add(EntityType.PLAYER, SAAttributes.RESILIENCE);
+
+
     }
 }

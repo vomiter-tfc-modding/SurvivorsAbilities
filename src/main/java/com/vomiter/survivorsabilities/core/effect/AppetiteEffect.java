@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 public class AppetiteEffect extends MobEffect {
     public static final ResourceLocation MODIFIER_ID =
             ResourceLocation.fromNamespaceAndPath("survivorsabilities", "appetite_effect");
-    protected AppetiteEffect() {
+    public AppetiteEffect() {
         super(MobEffectCategory.NEUTRAL, 0);
         this.addAttributeModifier(
                 SAAttributes.APPETITE.getDelegate(),
