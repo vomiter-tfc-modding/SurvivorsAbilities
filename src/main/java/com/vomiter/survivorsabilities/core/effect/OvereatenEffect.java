@@ -4,6 +4,7 @@ import com.vomiter.survivorsabilities.core.SAAttributes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import org.jetbrains.annotations.NotNull;
 
 public class OvereatenEffect extends MobEffect {
     public OvereatenEffect() {
@@ -12,7 +13,7 @@ public class OvereatenEffect extends MobEffect {
     }
 
     @Override
-    public double getAttributeModifierValue(int amp, AttributeModifier p_19458_) {
+    public double getAttributeModifierValue(int amp, @NotNull AttributeModifier p_19458_) {
         return 5 * (amp + 1) * -1;
     }
 }
