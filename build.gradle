@@ -94,7 +94,10 @@ repositories {
 tasks.processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
-
+def mixinExtrasVersion = "0.4.1"
+configurations {
+    mixinextrasEmbed
+}
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
@@ -103,7 +106,7 @@ dependencies {
     annotationProcessor "io.github.llamalad7:mixinextras-common:0.4.1"
     compileOnly       "io.github.llamalad7:mixinextras-common:0.4.1"
     implementation    "io.github.llamalad7:mixinextras-forge:0.4.1"
-    jarJar            "io.github.llamalad7:mixinextras-forge:[0.4.1,)"
+    mixinextrasEmbed  "io.github.llamalad7:mixinextras-forge:${mixinExtrasVersion}"
 
     implementation fg.deobf("curse.maven:terrafirmacraft-302973:6990923")
     implementation fg.deobf("curse.maven:patchouli-306770:4636277")
@@ -142,6 +145,14 @@ tasks.named('jar', Jar).configure {
         ])
     }
 
+    from({
+        configurations.mixinextrasEmbed.collect { it.isDirectory() ? it : zipTree(it) }
+    }) {
+        // 不要把 mixinextras 自己的 mods.toml 打包進來
+        exclude 'META-INF/mods.toml'
+        // 簽章檔案一律丟掉，避免多重簽章問題
+        exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'pack.mcmeta'
+    }
     // This is the preferred method to reobfuscate your jar file
     finalizedBy 'reobfJar'
 }
@@ -163,19 +174,4 @@ publishing {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
-
-jarJar.enable()
-reobf {
-    create("jarJar")
-}
-tasks.named('jar').configure { finalizedBy 'reobfJar' }
-tasks.named('jarJar').configure { finalizedBy 'reobfJarJar' }
-
-mixin{
-    add sourceSets.main, "survivorsabilities.mixins.refmap.json";
-    config "survivorsabilities.mixins.json";
-    debug.verbose = true
-    debug.export = true
-}
-
 
