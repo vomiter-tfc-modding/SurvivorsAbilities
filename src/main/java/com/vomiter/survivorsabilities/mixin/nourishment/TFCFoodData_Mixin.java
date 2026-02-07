@@ -31,13 +31,23 @@ public abstract class TFCFoodData_Mixin {
 
     @ModifyConstant(method = "addExhaustion", constant = @Constant(floatValue = 0.4f))
     private float tolerateExhaustion(float value, @Local(argsOnly = true) float toAdd){
-        if(toAdd > 0){
-            if(getFoodLevel() >= 4 && getThirst() > 20 && sourcePlayer.isHurt()){
-                float toleranceLvl = (float) Objects.requireNonNull(sourcePlayer.getAttribute(SAAttributes.HUNGER_TOLERANCE.get())).getValue();
-                return Math.max(value * (1 - toleranceLvl/10), 0);
-            }
+        if (toAdd <= 0) return value;
+
+        boolean shouldAllowExhaustion =
+                sourcePlayer.isHurt()
+                        && getFoodLevel() >= 4
+                        && getThirst() > 20;
+
+        if (shouldAllowExhaustion) {
+            return value;
         }
-        return value;
+
+        float toleranceLvl = (float) Objects.requireNonNull(
+                sourcePlayer.getAttribute(SAAttributes.HUNGER_TOLERANCE.get())
+        ).getValue();
+
+        float factor = 1f - (toleranceLvl / 10f);   // tolerance=10 -> factor=0
+        return Math.max(value * factor, 0f);
     }
 
     @Inject(method = "tick", at = @At(value = "TAIL"))
