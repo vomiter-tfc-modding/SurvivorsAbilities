@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 public class OvereatenEffect extends MobEffect {
     public OvereatenEffect() {
         super(MobEffectCategory.NEUTRAL, 0);
-        this.addAttributeModifier(SAAttributes.APPETITE.get(), "b20b104c-4029-4ace-8db5-3971dd51caf0", 0, AttributeModifier.Operation.ADDITION);
+        this.addAttributeModifier(SAAttributes.APPETITE.get(), "ac495014-1d8f-4a9d-8149-6ef7dd0e6430", 0, AttributeModifier.Operation.ADDITION);
     }
 
     @Override
