@@ -50,7 +50,12 @@ public class BlockDropResourceMixin {
             var newList = new ArrayList<ItemStack>();
             for (ItemStack lootStack : cir.getReturnValue()) {
                 if(serverLevel.random.nextFloat() < tfcFortune * 0.1){
-                    newList.addAll(TFCFortuneMap.getFortuneResult(lootStack.getItem()));
+                    var results = TFCFortuneMap.getFortuneResult(lootStack);
+                    if (results.isEmpty()) {
+                        newList.add(lootStack);
+                    } else {
+                        newList.addAll(results);
+                    }
                 }
                 else newList.add(lootStack);
             }
